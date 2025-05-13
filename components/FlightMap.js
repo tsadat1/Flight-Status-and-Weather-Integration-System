@@ -1,6 +1,13 @@
-
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import L from 'leaflet';
+
+const planeIcon = new L.Icon({
+  iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+  iconSize: [25, 25],
+  iconAnchor: [12, 12],
+  popupAnchor: [0, -10],
+});
 
 export default function FlightMap({ flights }) {
   return (
@@ -10,8 +17,14 @@ export default function FlightMap({ flights }) {
         attribution="&copy; OpenStreetMap contributors"
       />
       {flights.map((flight, i) => (
-        <Marker key={i} position={[flight.latitude, flight.longitude]}>
-          <Popup>{`${flight.callsign} - ${flight.departure} to ${flight.arrival}`}</Popup>
+        <Marker
+          key={i}
+          position={[flight.latitude, flight.longitude]}
+          icon={planeIcon}
+        >
+          <Popup>
+            {`${flight.callsign} - ${flight.departure} to ${flight.arrival}`}
+          </Popup>
         </Marker>
       ))}
     </MapContainer>
