@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <input type="text" id="icaoInput" placeholder="Enter ICAO (e.g., KJFK)">
+    <button onclick="fetchWeather()">Get Weather</button>
+    <canvas id="weatherChart" width="400" height="200"></canvas>
+    <div id="map" style="height: 400px;"></div>
+    <script src="scripts/dashboard.js"></script>
+</body>
+</html>
