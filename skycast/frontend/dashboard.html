@@ -12,8 +12,11 @@
     <h1>Dashboard</h1>
     <input type="text" id="icaoInput" placeholder="Enter ICAO (e.g., KJFK)">
     <button onclick="fetchWeather()">Get Weather</button>
+    <button onclick="saveFavorite()">Save to Favorites</button>
     <canvas id="weatherChart" width="400" height="200"></canvas>
     <div id="map" style="height: 400px;"></div>
+    <h2>Favorites</h2>
+    <ul id="favoritesList"></ul>
     <script src="scripts/dashboard.js"></script>
 </body>
 </html>
