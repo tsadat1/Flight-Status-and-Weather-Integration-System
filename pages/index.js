@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
-import FlightMap from '../components/FlightMap';
+import dynamic from 'next/dynamic';
+const FlightMap = dynamic(() => import('../components/FlightMap'), { ssr: false });
 import FlightChart from '../components/FlightChart';
 
 export default function HomePage() {
