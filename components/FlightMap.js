@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 
 const planeIcon = new L.Icon({
-  iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+  iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Plane_icon.svg',
   iconSize: [25, 25],
   iconAnchor: [12, 12],
   popupAnchor: [0, -10],
