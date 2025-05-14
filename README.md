@@ -1,12 +1,19 @@
-# Weather App
+# Flight Status and Weather Integration System
 
-## Description
-This full-stack weather application lets users check current weather using the Weatherstack API and logs each query to a Supabase database.
+## 🌦️ Description
 
-## Target Browsers
-- iOS Safari
-- Android Chrome
-- Chrome, Firefox, Edge (Desktop)
+This web application allows users to check real-time weather data for any city, visualize it using interactive charts, and store that data in a Supabase database for future use. The project was developed as part of the INST 377 course to demonstrate front-end and back-end integration using real APIs, cloud hosting, and modern web technologies.
 
-## Link to Developer Manual
-See [Developer Manual](./docs/DEVELOPER_MANUAL.md)
+## 🌐 Target Browsers
+
+- Desktop: Chrome, Firefox, Safari, Edge
+- Mobile: iOS Safari, Android Chrome
+
+## 🚀 Live Links
+
+- **Frontend (Vercel)**: [https://your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
+- **Backend (Render)**: [https://weather-backend-7ffl.onrender.com](https://weather-backend-7ffl.onrender.com)
+
+## 📘 Developer Manual
+
+See [`docs/DEVELOPER_MANUAL.md`](docs/DEVELOPER_MANUAL.md)
