@@ -13,7 +13,9 @@
   <button onclick="getWeather()">Get Weather</button>
   <canvas id="weatherChart" width="400" height="200"></canvas>
   <script>
-  let chartInstance = null; // Track the chart globally
+  const API_BASE = 'https://weather-backend-7ffl.onrender.com';
+
+  let chartInstance = null;
 
   async function getWeather() {
     const location = document.getElementById('locationInput').value.trim();
@@ -23,7 +25,7 @@
     }
 
     try {
-      const res = await fetch(`http://localhost:3001/api/weather/${location}`);
+      const res = await fetch(`${API_BASE}/api/weather/${location}`);
       if (!res.ok) throw new Error("Weather API call failed");
       const data = await res.json();
 
@@ -34,12 +36,11 @@
         throw new Error("Invalid weather data");
       }
 
-      // 🧼 Destroy old chart if it exists
+      // Destroy previous chart if it exists
       if (chartInstance) {
         chartInstance.destroy();
       }
 
-      // ✅ Create new chart
       chartInstance = new Chart(document.getElementById('weatherChart'), {
         type: 'bar',
         data: {
@@ -52,8 +53,8 @@
         }
       });
 
-      // Save to Supabase
-      const logRes = await fetch('http://localhost:3001/api/logs', {
+      // POST log to Supabase through your backend
+      const logRes = await fetch(`${API_BASE}/api/logs`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ location, weather: data.current })
