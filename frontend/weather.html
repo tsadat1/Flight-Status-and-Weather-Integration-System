@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weather Page</title>
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -14,30 +15,49 @@
 
   <script>
     async function getWeather() {
-      const location = document.getElementById('locationInput').value;
-      const res = await fetch(`http://localhost:3001/api/weather/${location}`);
-      const data = await res.json();
-      const temp = data.current.temperature;
-      const feels = data.current.feelslike;
+      const location = document.getElementById('locationInput').value.trim();
+      if (!location) {
+        alert("Please enter a city name.");
+        return;
+      }
 
-      new Chart(document.getElementById('weatherChart'), {
-        type: 'bar',
-        data: {
-          labels: ['Temperature', 'Feels Like'],
-          datasets: [{
-            label: `Weather in ${location}`,
-            data: [temp, feels],
-            backgroundColor: ['#3498db', '#2ecc71']
-          }]
+      try {
+        const res = await fetch(`http://localhost:3001/api/weather/${location}`);
+        if (!res.ok) throw new Error("Weather API call failed");
+        const data = await res.json();
+
+        const temp = data.current?.temperature;
+        const feels = data.current?.feelslike;
+
+        if (temp === undefined || feels === undefined) {
+          throw new Error("Invalid weather data");
         }
-      });
 
-      await fetch('http://localhost:3001/api/logs', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ location, weather: JSON.stringify(data.current) })
-      });
+        new Chart(document.getElementById('weatherChart'), {
+          type: 'bar',
+          data: {
+            labels: ['Temperature', 'Feels Like'],
+            datasets: [{
+              label: `Weather in ${location}`,
+              data: [temp, feels],
+              backgroundColor: ['#3498db', '#2ecc71']
+            }]
+          }
+        });
+
+        const logRes = await fetch('http://localhost:3001/api/logs', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ location, weather: data.current })
+        });
+
+        const logResult = await logRes.json();
+        console.log("✅ Supabase insert result:", logResult);
+
+      } catch (err) {
+        console.error("❌ Error:", err);
+        alert("Something went wrong. Check the console for details.");
+      }
     }
   </script>
 </body>
-</html>
