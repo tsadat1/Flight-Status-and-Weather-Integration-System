@@ -11,7 +11,7 @@ This web application allows users to check real-time weather data for any city, 
 
 ## 🚀 Live Links
 
-- **Frontend (Vercel)**: [https://your-vercel-url.vercel.app](https://your-vercel-url.vercel.app)
+- **Frontend (Vercel)**: [https://flight-status-and-weather-integration-system-pvif.vercel.app/)
 - **Backend (Render)**: [https://weather-backend-7ffl.onrender.com](https://weather-backend-7ffl.onrender.com)
 
 ## 📘 Developer Manual
