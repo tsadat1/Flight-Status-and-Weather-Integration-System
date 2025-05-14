@@ -14,11 +14,21 @@ app.use(express.json());
 // Fetch weather from Weatherstack
 app.get('/api/weather/:location', async (req, res) => {
   const location = req.params.location;
-  const response = await fetch(
-    `http://api.weatherstack.com/current?access_key=efdd3b5aac620924ab47ca114ba85171&query=${location}`
-  );
-  const data = await response.json();
-  res.json(data);
+
+  try {
+    const response = await fetch(
+      `http://api.weatherstack.com/current?access_key=efdd3b5aac620924ab47ca114ba85171&query=${location}`
+    );
+
+    const text = await response.text();               // Get raw response as text
+    console.log("RAW Weatherstack response:", text);  // Log it to terminal
+
+    const data = JSON.parse(text);                    // Try to parse
+    res.json(data);
+  } catch (err) {
+    console.error("Error fetching weather:", err);
+    res.status(500).json({ error: "Failed to fetch weather data." });
+  }
 });
 
 // Retrieve logs from Supabase
