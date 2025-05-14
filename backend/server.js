@@ -1,8 +1,11 @@
 const express = require('express');
-const fetch = require('node-fetch');
 const cors = require('cors');
 require('dotenv').config();
 const { createClient } = require('@supabase/supabase-js');
+
+// FIX: use fetch for Node v18+
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
